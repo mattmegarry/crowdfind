@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 
-import { BASE_URL } from "react-native-dotenv";
-
 import CustomButton from "./Button.js";
+
+import { httpRequest } from "../utils/httpRequestNoAuth";
 
 export default function WelcomeView(props) {
   const [joinSessionSelection, setJoinSessionSelection] = useState(false);
@@ -20,16 +20,10 @@ export default function WelcomeView(props) {
   async function joinSessionRequest() {
     try {
       setLoading(true);
-      const res = await fetch(BASE_URL + "/finding/join", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          findSessionNameInput: findSessionNameInput
-        })
-      });
+      const body = {
+        findSessionNameInput: findSessionNameInput
+      };
+      const res = await httpRequest("/finding/join", "POST", body);
 
       if (res.status === 404) {
         setErrorMessage(
@@ -38,8 +32,7 @@ export default function WelcomeView(props) {
         setLoading(false);
       }
       if (res.status === 200) {
-        const json = await res.json();
-        setFindSessionName(json.data.findSessionName);
+        setFindSessionName(res.findSessionName);
       }
     } catch (e) {
       console.error(e);
