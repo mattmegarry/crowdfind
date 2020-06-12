@@ -3,12 +3,26 @@
 import express from "express";
 const findingRouter = express.Router();
 
-findingRouter.get("/create", (req, res, next) => {
+findingRouter.post("/create", (req, res, next) => {
   res.json({ message: "Create a finding? Not yet!" });
 });
 
 findingRouter.post("/join", (req, res, next) => {
-  res.json({ message: "Join exisiting? Not yet!" });
+  console.log(req.body.findSessionNameInput);
+  if (req.body.findSessionNameInput === "TestTestTest") {
+    res.status(200).json({
+      data: {
+        findSessionName: "TestTestTest",
+        otherInfo: "All the other info about the find session"
+      }
+    });
+  } else {
+    res.status(404).json({
+      data: {
+        findSessionName: null
+      }
+    });
+  }
 });
 
 export default findingRouter;
