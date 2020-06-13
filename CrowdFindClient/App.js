@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import MapView from "./components/MapView.js";
-import WelcomeView from "./components/WelcomeView.js";
+import Map from "./components/Map.js";
+import Welcome from "./components/Welcome.js";
 
 export default function App() {
   const [findSessionName, setFindSessionName] = useState("");
@@ -13,9 +13,9 @@ export default function App() {
         <Text style={styles.title}>CrowdFind MVP</Text>
       </View>
       {findSessionName ? (
-        <MapView findSessionName={findSessionName}></MapView>
+        <Map findSessionName={findSessionName}></Map>
       ) : (
-        <WelcomeView setFindSessionName={setFindSessionName}></WelcomeView>
+        <Welcome setFindSessionName={setFindSessionName}></Welcome>
       )}
     </View>
   );

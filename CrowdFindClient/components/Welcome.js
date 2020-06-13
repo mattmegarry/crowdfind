@@ -5,7 +5,7 @@ import CustomButton from "./Button.js";
 
 import { httpRequest } from "../utils/httpRequestNoAuth";
 
-export default function WelcomeView(props) {
+export default function Welcome(props) {
   const [joinSessionSelection, setJoinSessionSelection] = useState(false);
   const [findSessionNameInput, setFindSessionNameInput] = useState("");
   const [loading, setLoading] = useState(false);

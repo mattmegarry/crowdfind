@@ -9,10 +9,10 @@ findingRouter.post("/create", (req, res, next) => {
 
 findingRouter.post("/join", (req, res, next) => {
   console.log(req.body.findSessionNameInput);
-  if (req.body.findSessionNameInput === "TestTestTest") {
+  if (req.body.findSessionNameInput === "A") {
     res.status(200).json({
       data: {
-        findSessionName: "TestTestTest",
+        findSessionName: "ApplesMountainJewel",
         otherInfo: "All the other info about the find session"
       }
     });

@@ -10,6 +10,8 @@ export const httpRequest = (path, method, body) => {
     body: JSON.stringify(body)
   };
 
+  console.log("The IP is " + BASE_URL);
+
   return fetch(BASE_URL + path, options)
     .then(async res => {
       if (MODE === "development") {
