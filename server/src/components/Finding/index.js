@@ -4,6 +4,22 @@ import express from "express";
 const findingRouter = express.Router();
 
 findingRouter.post("/create", (req, res, next) => {
+  const words = [
+    "Insecure",
+    "Testing",
+    "Danger",
+    "Nascent",
+    "Later",
+    "Just",
+    "For",
+    "Now",
+    "Agile"
+  ];
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+
   res.json({ message: "Create a finding? Not yet!" });
 });
 
