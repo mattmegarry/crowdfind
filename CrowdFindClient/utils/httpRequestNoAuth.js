@@ -18,8 +18,9 @@ export const httpRequest = (path, method, body) => {
         console.log(res);
       }
       const json = await res.json();
-      const result = json.data;
+      const result = {};
       result.status = res.status;
+      result.data = json.data;
       return result;
     })
     .catch(err => {

@@ -8,7 +8,7 @@ export default function Map(props) {
   const { findSessionName } = props;
   return (
     <View style={styles.main}>
-      <Text>{findSessionName} Woo</Text>
+      <Text>{findSessionName}</Text>
       <MapView
         style={styles.mapStyle}
         initialRegion={{

@@ -32,7 +32,25 @@ export default function Welcome(props) {
         setLoading(false);
       }
       if (res.status === 200) {
-        setFindSessionName(res.findSessionName);
+        setFindSessionName(res.data.findSessionName);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function createSessionRequest() {
+    try {
+      setLoading(true);
+      const res = await httpRequest("/finding/create", "POST");
+
+      if (res.status === 500) {
+        setErrorMessage("Something went wrong, sorry! Please try again...");
+        setLoading(false);
+      }
+      if (res.status === 200) {
+        console.log(JSON.stringify(res.data.findSessionName));
+        setFindSessionName(res.data.findSessionName);
       }
     } catch (e) {
       console.error(e);
@@ -49,11 +67,11 @@ export default function Welcome(props) {
           <Text style={styles.explainerText}>
             All data is deleted after 3 hours!
           </Text>
+          <View>
+            {errorMessage ? <Text>{errorMessage}</Text> : <Text></Text>}
+          </View>
           {joinSessionSelection ? (
             <>
-              <View>
-                {errorMessage ? <Text>{errorMessage}</Text> : <Text></Text>}
-              </View>
               <View style={styles.buttonsContainer}>
                 <TextInput
                   style={{ height: 40 }}
@@ -66,7 +84,10 @@ export default function Welcome(props) {
             </>
           ) : (
             <View style={styles.buttonsContainer}>
-              <CustomButton buttonMessage="Create Session"></CustomButton>
+              <CustomButton
+                onPress={createSessionRequest}
+                buttonMessage="Create Session"
+              ></CustomButton>
               <CustomButton
                 onPress={handleJoinSessionSelect}
                 buttonMessage="Join Session"

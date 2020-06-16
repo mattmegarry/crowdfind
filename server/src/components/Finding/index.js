@@ -3,24 +3,21 @@
 import express from "express";
 const findingRouter = express.Router();
 
-findingRouter.post("/create", (req, res, next) => {
-  const words = [
-    "Insecure",
-    "Testing",
-    "Danger",
-    "Nascent",
-    "Later",
-    "Just",
-    "For",
-    "Now",
-    "Agile"
-  ];
+import { createFinding } from "./finding.controller";
 
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
+findingRouter.post("/create", async (req, res, next) => {
+  try {
+    const databaseResponse = await createFinding();
+
+    res.status(200).json({
+      data: {
+        findSessionName: databaseResponse.findSessionName
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({});
   }
-
-  res.json({ message: "Create a finding? Not yet!" });
 });
 
 findingRouter.post("/join", (req, res, next) => {
