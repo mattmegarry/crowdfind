@@ -1,48 +1,114 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { BASE_URL } from "react-native-dotenv";
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ */
 
-import Map from "./components/Map.js";
-import Welcome from "./components/Welcome.js";
-import CustomButton from "./components/Button.js";
+import React from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  StatusBar,
+} from 'react-native';
 
-export default function App() {
-  const [findSessionName, setFindSessionName] = useState("");
+import {
+  Header,
+  LearnMoreLinks,
+  Colors,
+  DebugInstructions,
+  ReloadInstructions,
+} from 'react-native/Libraries/NewAppScreen';
 
-  function resetJustForDevelopment() {
-    setFindSessionName("");
-  }
-
+const App: () => React$Node = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>CrowdFinnd MVP</Text>
-        <CustomButton
-          style={{ position: "absolute", left: 200, top: 200 }}
-          onPress={resetJustForDevelopment}
-          buttonMessage="resetJustForDevelopment"
-        />
-        <Text>{BASE_URL}</Text>
-      </View>
-      {findSessionName ? (
-        <Map findSessionName={findSessionName}></Map>
-      ) : (
-        <Welcome setFindSessionName={setFindSessionName}></Welcome>
-      )}
-    </View>
+    <>
+      <StatusBar barStyle="dark-content" />
+      <SafeAreaView>
+        <ScrollView
+          contentInsetAdjustmentBehavior="automatic"
+          style={styles.scrollView}>
+          <Header />
+          {global.HermesInternal == null ? null : (
+            <View style={styles.engine}>
+              <Text style={styles.footer}>Engine: Hermes</Text>
+            </View>
+          )}
+          <View style={styles.body}>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.sectionTitle}>Step One</Text>
+              <Text style={styles.sectionDescription}>
+                Edit <Text style={styles.highlight}>App.js</Text> to change this
+                screen and then come back to see your edits.
+              </Text>
+            </View>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.sectionTitle}>See Your Changes</Text>
+              <Text style={styles.sectionDescription}>
+                <ReloadInstructions />
+              </Text>
+            </View>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.sectionTitle}>Debug</Text>
+              <Text style={styles.sectionDescription}>
+                <DebugInstructions />
+              </Text>
+            </View>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.sectionTitle}>Learn More</Text>
+              <Text style={styles.sectionDescription}>
+                Read the ducks to discover what to do next:
+              </Text>
+            </View>
+            <LearnMoreLinks />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  header: {
-    flex: 1,
-    backgroundColor: "green",
-    justifyContent: "center"
+  scrollView: {
+    backgroundColor: Colors.lighter,
   },
-  title: {
-    color: "#c2c2c2",
-    fontSize: 30,
-    textAlign: "center"
-  }
+  engine: {
+    position: 'absolute',
+    right: 0,
+  },
+  body: {
+    backgroundColor: Colors.white,
+  },
+  sectionContainer: {
+    marginTop: 32,
+    paddingHorizontal: 24,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: Colors.black,
+  },
+  sectionDescription: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: '400',
+    color: Colors.dark,
+  },
+  highlight: {
+    fontWeight: '700',
+  },
+  footer: {
+    color: Colors.dark,
+    fontSize: 12,
+    fontWeight: '600',
+    padding: 4,
+    paddingRight: 12,
+    textAlign: 'right',
+  },
 });
+
+export default App;
